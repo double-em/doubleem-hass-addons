@@ -10,10 +10,6 @@ startup: services
 boot: auto
 hassio_role: default
 
-# Map share for persistent data
-map:
-  - share:rw
-
 # Configuration options
 options:
   default_provider: "minimax"
