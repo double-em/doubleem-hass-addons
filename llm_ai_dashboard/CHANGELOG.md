@@ -1,0 +1,14 @@
+# Changelog
+
+All notable changes to this add-on will be documented in this file.
+
+## [0.1.0] - 2025-10-11
+
+### Added
+- Initial release of LLM AI Dashboard add-on
+- AI Provider management for Home Assistant
+- Voice cloning functionality
+- Text-to-Speech (TTS) capabilities
+- AI memory integration
+- Configurable default provider settings
+- Adjustable voice speed and diffusion steps

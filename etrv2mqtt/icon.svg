@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 120 120">
+  <!-- Material: White background, bold dark orange icon - high contrast -->
+  <rect width="120" height="120" rx="24" fill="white"/>
+  <rect x="10" y="10" width="100" height="100" rx="20" fill="white" stroke="#FF5722" stroke-width="4"/>
+  <!-- Thermostat circle - prominent -->
+  <circle cx="60" cy="60" r="32" fill="#FF5722"/>
+  <!-- Temperature arc - white on orange -->
+  <path d="M60 32 A28 28 0 1 1 32 60" fill="none" stroke="white" stroke-width="6" stroke-linecap="round"/>
+  <!-- Center display -->
+  <text x="60" y="68" font-family="sans-serif" font-size="20" font-weight="500" fill="white" text-anchor="middle">72</text>
+</svg>
