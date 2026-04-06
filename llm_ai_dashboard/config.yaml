@@ -1,5 +1,5 @@
 name: "LLM AI Dashboard"
-description: "AI Provider management, voice cloning and TTS for Home Assistant"
+description: "AI Provider management, voice cloning, TTS, and AI memory for Home Assistant"
 version: "0.1.0"
 slug: "llm_ai_dashboard"
 init: false
@@ -7,13 +7,22 @@ arch:
   - aarch64
   - amd64
 startup: services
-ports:
-  8000/tcp: 8000
+boot: auto
+hassio_role: default
+
+# Map share for persistent data
+map:
+  - share:rw
+
+# Configuration options
 options:
   default_provider: "minimax"
   default_voice_speed: 1.0
   default_diffusion_steps: 32
+
 schema:
   default_provider: str
   default_voice_speed: num
   default_diffusion_steps: int
+
+image: "ghcr.io/double-em/llm-hass-app-{arch}"
