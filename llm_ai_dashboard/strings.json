@@ -1,0 +1,46 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Configure LLM AI Dashboard",
+        "description": "Set default values for AI provider, voice speed, and diffusion steps",
+        "data": {
+          "default_provider": "Default Provider",
+          "default_voice_speed": "Voice Speed",
+          "default_diffusion_steps": "Diffusion Steps"
+        },
+        "data_description": {
+          "default_provider": "Default AI provider to use (e.g., minimax)",
+          "default_voice_speed": "Voice playback speed (0.5x to 2.0x)",
+          "default_diffusion_steps": "Diffusion steps for voice generation (1-100)"
+        }
+      }
+    },
+    "error": {
+      "invalid_provider": "Invalid AI provider specified.",
+      "invalid_speed": "Voice speed must be between 0.5 and 2.0.",
+      "invalid_steps": "Diffusion steps must be between 1 and 100."
+    },
+    "abort": {
+      "already_configured": "LLM AI Dashboard is already configured."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Configure LLM AI Dashboard",
+        "description": "Update default values for AI provider, voice speed, and diffusion steps",
+        "data": {
+          "default_provider": "Default Provider",
+          "default_voice_speed": "Voice Speed",
+          "default_diffusion_steps": "Diffusion Steps"
+        },
+        "data_description": {
+          "default_provider": "Default AI provider to use (e.g., minimax)",
+          "default_voice_speed": "Voice playback speed (0.5x to 2.0x)",
+          "default_diffusion_steps": "Diffusion steps for voice generation (1-100)"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,70 @@
+name: "eTRV MQTT Bridge"
+description: "MQTT bridge for Danfoss Eco Bluetooth thermostats with Home Assistant autodiscovery"
+version: "1.0.0"
+slug: "etrv2mqtt"
+init: false
+arch:
+  - amd64
+startup: services
+boot: auto
+host_network: true  # Required for Bluetooth access
+hassio_role: default
+
+# Bluetooth access requirements
+privileged:
+  - SYS_ADMIN
+devices:
+  - /dev/bus/usb
+
+# Device access for Bluetooth
+devicetree: true
+
+# Services
+services:
+  - mqtt:want  # Ensure MQTT broker is available
+
+# Configuration schema
+options:
+  mqtt:
+    server: "core-mosquitto"
+    port: 1883
+    base_topic: "homeassistant"
+    user: ""
+    password: ""
+    autodiscovery: true
+    autodiscovery_topic: "homeassistant"
+    autodiscovery_retain: true
+    hass_birth_topic: "homeassistant/status"
+    hass_birth_payload: "online"
+  options:
+    retry_limit: 5
+    poll_interval: 300
+    stay_connected: false
+    report_room_temperature: true
+    setpoint_debounce_time: 5
+  thermostats: []
+
+schema:
+  mqtt:
+    server: str
+    port: port
+    base_topic: str
+    user: str?
+    password: password?
+    autodiscovery: bool
+    autodiscovery_topic: str
+    autodiscovery_retain: bool
+    hass_birth_topic: str
+    hass_birth_payload: str
+  options:
+    retry_limit: int(1,10)
+    poll_interval: int(60,3600)
+    stay_connected: bool
+    report_room_temperature: bool
+    setpoint_debounce_time: int(0,60)
+  thermostats:
+    - topic: str
+      address: match(^([0-9A-Fa-f]{2}[:-]){5}([0-9A-Fa-f]{2})$)
+      secret_key: match(^[0-9a-fA-F]{32}$)
+
+image: "ghcr.io/double-em/{arch}-addon-etrv2mqtt"
