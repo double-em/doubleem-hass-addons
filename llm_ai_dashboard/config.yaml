@@ -22,7 +22,7 @@ options:
 
 schema:
   default_provider: str
-  default_voice_speed: num
-  default_diffusion_steps: int
+  default_voice_speed: float(0.5, 2.0)
+  default_diffusion_steps: int(1, 100)
 
 image: "ghcr.io/double-em/llm-hass-app-{arch}"
