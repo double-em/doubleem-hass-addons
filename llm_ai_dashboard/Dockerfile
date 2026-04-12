@@ -10,12 +10,12 @@ ARG LLM_BRANCH=main
 ARG LLM_VERSION=unknown
 
 # Install system dependencies
-RUN apk add --no-cache \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     python3 \
-    py3-pip \
+    python3-pip \
     git \
     ffmpeg \
-    su-exec
+    && rm -rf /var/lib/apt/lists/*
 
 # Set working directory
 WORKDIR /app
@@ -23,7 +23,7 @@ WORKDIR /app
 # Clone the source repository
 RUN git clone --depth 1 --branch ${LLM_BRANCH} ${LLM_REPO} /tmp/llm-hass-app
 
-# Install CPU-only PyTorch first
+# Install CPU-only PyTorch first (CPU-only index for Debian)
 RUN pip3 install --no-cache-dir --break-system-packages --index-url https://download.pytorch.org/whl/cpu \
     torch==2.8.0 torchaudio==2.8.0
 
@@ -36,8 +36,7 @@ RUN pip3 install --no-cache-dir --break-system-packages \
     numpy \
     chromadb \
     sentence-transformers \
-    websockets \
-    gunicorn
+    websockets
 
 # Copy application files from source
 RUN cp -r /tmp/llm-hass-app/* /app/
@@ -47,7 +46,7 @@ RUN echo '__version__ = "'"${LLM_VERSION}"'"' > /app/version.py
 
 # Create non-root user and set up data directories
 RUN mkdir -p /data/voices /data/persons /data/samples /data/memory && \
-    adduser -D -u 1000 appuser && \
+    useradd -m -u 1000 appuser && \
     chown -R appuser:appuser /app /data
 
 # Copy run script
