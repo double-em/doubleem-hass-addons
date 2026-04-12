@@ -2,9 +2,6 @@
 
 echo "Starting LLM AI Dashboard..."
 
-# Create directories
-mkdir -p /data/voices
-
-# Start the Flask app
+# Start the Flask app as non-root user
 cd /app
-python3 app.py --host 0.0.0.0 --port 8000
+exec su-exec appuser python3 app.py --host 0.0.0.0 --port 8000

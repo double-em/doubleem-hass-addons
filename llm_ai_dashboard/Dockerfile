@@ -7,12 +7,15 @@ SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 # Build arguments for LLM AI Dashboard source repository
 ARG LLM_REPO=https://github.com/double-em/llm-hass-app.git
 ARG LLM_BRANCH=main
+ARG LLM_VERSION=unknown
 
 # Install system dependencies
 RUN apk add --no-cache \
     python3 \
     py3-pip \
-    git
+    git \
+    ffmpeg \
+    su-exec
 
 # Set working directory
 WORKDIR /app
@@ -20,24 +23,32 @@ WORKDIR /app
 # Clone the source repository
 RUN git clone --depth 1 --branch ${LLM_BRANCH} ${LLM_REPO} /tmp/llm-hass-app
 
+# Install CPU-only PyTorch first
+RUN pip3 install --no-cache-dir --break-system-packages --index-url https://download.pytorch.org/whl/cpu \
+    torch==2.8.0 torchaudio==2.8.0
+
 # Install Python dependencies from source
 RUN pip3 install --no-cache-dir --break-system-packages \
     flask \
     requests \
-    torch \
-    torchaudio \
     omnivoice \
     resemblyzer \
     numpy \
     chromadb \
     sentence-transformers \
-    websockets
+    websockets \
+    gunicorn
 
 # Copy application files from source
-RUN cp -r /tmp/llm-hass-app/* /app/ 2>/dev/null || true
+RUN cp -r /tmp/llm-hass-app/* /app/
 
-# Create voices directory
-RUN mkdir -p /data/voices
+# Write version.py for logging
+RUN echo '__version__ = "'"${LLM_VERSION}"'"' > /app/version.py
+
+# Create non-root user and set up data directories
+RUN mkdir -p /data/voices /data/persons /data/samples /data/memory && \
+    adduser -D -u 1000 appuser && \
+    chown -R appuser:appuser /app /data
 
 # Copy run script
 COPY run.sh /app/run.sh
@@ -51,6 +62,8 @@ LABEL \
     io.hass.name="LLM AI Dashboard" \
     io.hass.description="AI Provider management, voice cloning, TTS, and AI memory for Home Assistant" \
     io.hass.type="addon" \
-    io.hass.version="0.1.0"
+    io.hass.version="${LLM_VERSION}"
+
+USER appuser
 
 CMD [ "/app/run.sh" ]
