@@ -12,7 +12,9 @@ ingress: true
 panel_icon: mdi:robot
 panel_title: LLM AI
 panel_header: LLM AI Dashboard
-timeout: 600
+
+# Minimum Home Assistant version
+homeassistant: 2023.8.0
 
 # Configuration options
 options:
