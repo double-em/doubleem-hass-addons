@@ -2,6 +2,10 @@
 
 n## [v1.1.4] - 2026-04-13
 
+n## [] - 2026-04-13
+
+### Changed
+- Version bump to 
 ### Changed
 - Version bump to v1.1.4
 All notable changes to this add-on will be documented in this file.

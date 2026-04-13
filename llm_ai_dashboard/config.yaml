@@ -1,6 +1,6 @@
 name: "LLM AI Dashboard"
 description: "AI Provider management, voice cloning, TTS, and AI memory for Home Assistant"
-version: "v1.1.4"
+version: ""
 slug: "llm_ai_dashboard"
 init: false
 arch:
