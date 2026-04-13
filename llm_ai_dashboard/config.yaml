@@ -13,8 +13,9 @@ panel_icon: mdi:robot
 panel_title: LLM AI
 panel_header: LLM AI Dashboard
 
-# Minimum Home Assistant version
-homeassistant: 2023.8.0
+# Network - HA ingress routes to port 8000
+ports:
+  8000/tcp: null
 
 # Configuration options
 options:

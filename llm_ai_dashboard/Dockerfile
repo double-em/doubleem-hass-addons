@@ -63,6 +63,8 @@ LABEL \
     io.hass.type="addon" \
     io.hass.version="${LLM_VERSION}"
 
+EXPOSE 8000
+
 USER appuser
 
 CMD [ "/app/run.sh" ]
