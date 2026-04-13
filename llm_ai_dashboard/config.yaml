@@ -8,6 +8,7 @@ arch:
 startup: services
 boot: auto
 hassio_role: default
+ingress: true
 panel_icon: mdi:robot
 panel_title: LLM AI
 panel_header: LLM AI Dashboard
