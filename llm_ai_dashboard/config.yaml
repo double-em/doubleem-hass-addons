@@ -1,6 +1,6 @@
 name: "LLM AI Dashboard"
 description: "AI Provider management, voice cloning, TTS, and AI memory for Home Assistant"
-version: "1.0.12"
+version: "1.0.13"
 slug: "llm_ai_dashboard"
 init: false
 arch:
@@ -12,6 +12,7 @@ ingress: true
 panel_icon: mdi:robot
 panel_title: LLM AI
 panel_header: LLM AI Dashboard
+timeout: 600
 
 # Configuration options
 options:
