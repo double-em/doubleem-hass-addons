@@ -1,6 +1,11 @@
 # Changelog
 
 All notable changes to this add-on will be documented in this file.
+## [1.3.0] - 2026-04-13
+
+### Changed
+- Version bump to 1.3.0
+
 ## [1.2.2] - 2026-04-13
 
 ### Changed
