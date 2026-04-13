@@ -8,7 +8,9 @@ arch:
 startup: services
 boot: auto
 hassio_role: default
-webui: "http://[HOST]:8000"
+panel_icon: mdi:robot
+panel_title: LLM AI
+panel_header: LLM AI Dashboard
 
 # Configuration options
 options:
