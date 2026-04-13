@@ -8,6 +8,7 @@ arch:
 startup: services
 boot: auto
 hassio_role: default
+webui: "http://[HOST]:8000"
 
 # Configuration options
 options:
