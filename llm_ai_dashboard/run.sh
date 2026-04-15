@@ -3,12 +3,12 @@ set -e
 
 echo "Starting LLM AI Dashboard..."
 
-# Fix /data permissions if mounted as root (HA supervisor behavior)
-# This must happen before we drop privileges
+# Ensure /data subdirectories exist and are writable by appuser
+# (HA supervisor may mount /data as root, blocking appuser writes)
 if [ -d /data ]; then
-    echo "Fixing /data permissions..."
-    mkdir -p /data/voices /data/persons /data/samples /data/memory
-    chown -R appuser:appuser /data 2>&1 || echo "Warning: could not chown /data (may already be correct)"
+    echo "Setting up /data directories..."
+    mkdir -p /data/voices /data/persons /data/samples /data/memory /data/sessions /data/voiceprints /data/enrollments 2>/dev/null || true
+    chmod -R 777 /data 2>/dev/null || true
 fi
 
 # Ensure app directory is writable
