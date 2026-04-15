@@ -16,4 +16,4 @@ chown -R appuser:appuser /app 2>&1 || true
 
 # Drop to appuser and start Flask
 echo "Starting Flask app as $(whoami)..."
-exec su -s /bin/bash -c 'cd /app && exec python3 app.py --host 0.0.0.0 --port 8000' appuser
+exec su -s /bin/bash -c 'cd /app && exec python3 app.py --host 0.0.0.0 --port 8099' appuser

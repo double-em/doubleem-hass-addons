@@ -15,7 +15,7 @@ panel_header: LLM AI Dashboard
 
 # Network - HA ingress routes to port 8000
 ports:
-  8000/tcp: null
+  8099/tcp: null
 
 # Configuration options
 options:
