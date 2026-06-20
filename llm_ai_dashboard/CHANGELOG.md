@@ -1,6 +1,17 @@
 # Changelog
 
 All notable changes to this add-on will be documented in this file.
+## [1.4.0] - 2026-06-20
+
+### Changed
+- Version bump to 1.4.0
+- `Dockerfile` `EXPOSE` now matches the actual Flask listen port (8099, not 8000)
+
+### Notes
+- Pairs with `double-em/llm-hass-app` 1.0.1, which adds Home Assistant
+  ingress support to the Flask app and templates. Without 1.0.1, the
+  ingress panel would 404 on every nav link.
+
 ## [1.3.0] - 2026-04-13
 
 ### Changed

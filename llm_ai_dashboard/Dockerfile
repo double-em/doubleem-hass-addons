@@ -63,7 +63,7 @@ LABEL \
     io.hass.type="addon" \
     io.hass.version="${LLM_VERSION}"
 
-EXPOSE 8000
+EXPOSE 8099
 
 USER appuser
 

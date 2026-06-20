@@ -1,6 +1,6 @@
 name: "LLM AI Dashboard"
 description: "AI Provider management, voice cloning, TTS, and AI memory for Home Assistant"
-version: "1.3.0"
+version: "1.4.0"
 slug: "llm_ai_dashboard"
 init: false
 arch:
@@ -13,7 +13,8 @@ panel_icon: mdi:robot
 panel_title: LLM AI
 panel_header: LLM AI Dashboard
 
-# Network - HA ingress routes to port 8000
+# Network - HA ingress routes to port 8099 inside the container; null
+# means "don't publish to the host" (ingress uses the internal port only).
 ports:
   8099/tcp: null
 
@@ -29,3 +30,7 @@ schema:
   default_diffusion_steps: int(1,100)
 
 image: "ghcr.io/double-em/llm-hass-app"
+# The supervisor pulls the `latest` tag by default; the addon store
+# (via `ha-updates.sh`) detects newer image digests on the registry and
+# triggers an in-place update. So pinning a tag here would actually
+# break that flow — leave as `:latest`-equivalent.
