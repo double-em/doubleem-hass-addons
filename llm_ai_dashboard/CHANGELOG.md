@@ -1,10 +1,15 @@
 # Changelog
 
 All notable changes to this add-on will be documented in this file.
+
 ## [1.4.1] - 2026-06-23
 
 ### Changed
-- Version bump to 1.4.1
+- Version bump to 1.4.1 to match the underlying `double-em/llm-hass-app` image (`ghcr.io/double-em/llm-hass-app:1.4.1` + `:latest`) which shipped today via the app repo's GitHub Actions. Without this bump the supervisor sees the addon as 1.4.0 while the pulled image is 1.4.1, causing version-mismatch warnings and unstable update detection.
+
+### Notes
+- No code changes in the wrapper itself. The ingress fix (EXPOSE 8099, `/data` writable, Flask ingress support) is already in 1.4.0 + the 1.4.1 app image. This release is purely the version-tag alignment + first GitHub release for the wrapper repo.
+- Pairs with `double-em/llm-hass-app` 1.4.1.
 
 ## [1.4.0] - 2026-06-20
 
