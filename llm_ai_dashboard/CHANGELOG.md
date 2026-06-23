@@ -1,10 +1,16 @@
 # Changelog
 
 All notable changes to this add-on will be documented in this file.
+
 ## [1.4.4] - 2026-06-23
 
 ### Changed
-- Version bump to 1.4.4
+- Version bump to 1.4.4 to match `double-em/llm-hass-app` 1.4.4, which fixes HA ingress nav links (was: every link 404'd, CSS missing, only the dashboard worked). Pairs with the ingress middleware rewrite in the app's v1.4.4. See GH release for full notes.
+
+## [1.4.3] - 2026-06-23
+
+### Changed
+- Added `ingress_panel: true` so the addon shows in the HA sidebar. Previously it was only accessible via the Add-on Store's "Open Web UI" button (per-page ingress URL). Now the supervisor auto-mounts the addon on the sidebar with the configured icon/title/header, and the dashboard is one click away from the main HA UI.
 
 ## [1.4.2] - 2026-06-23
 
