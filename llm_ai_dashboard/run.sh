@@ -3,17 +3,24 @@ set -e
 
 echo "Starting LLM AI Dashboard..."
 
-# Ensure /data subdirectories exist and are writable by appuser
-# (HA supervisor may mount /data as root, blocking appuser writes)
+# Ensure /data subdirectories exist and are writable.
+# HA supervisor mounts /data as root:root mode 0755 over the image's /data.
+# The chmod here runs AS ROOT (before any USER switch) so it actually works
+# on the supervisor mount point. chmod 777 makes the dirs traversable+writable
+# by whichever user the image eventually runs as.
 if [ -d /data ]; then
     echo "Setting up /data directories..."
-    mkdir -p /data/voices /data/persons /data/samples /data/memory /data/sessions /data/voiceprints /data/enrollments 2>/dev/null || true
+    for subdir in voices persons samples memory sessions voiceprints enrollments vector_memory; do
+        mkdir -p "/data/${subdir}" 2>/dev/null || true
+    done
     chmod -R 777 /data 2>/dev/null || true
 fi
 
 # Ensure app directory is writable
-chown -R appuser:appuser /app 2>&1 || true
+chown -R root:root /app 2>&1 || true
 
-# Drop to appuser and start Flask
+# Start Flask as root (the published image now runs without USER switch;
+# if it still switches to appuser the dirs are already 777 so it works)
 echo "Starting Flask app as $(whoami)..."
-exec su -s /bin/bash -c 'cd /app && exec python3 app.py --host 0.0.0.0 --port 8099' appuser
+cd /app
+exec python3 app.py --host 0.0.0.0 --port 8099

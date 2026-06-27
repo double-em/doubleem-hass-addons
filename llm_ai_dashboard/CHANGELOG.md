@@ -2,6 +2,31 @@
 
 All notable changes to this add-on will be documented in this file.
 
+## [1.4.5] - 2026-06-27
+
+### Changed
+- Version bump to 1.4.5 to match `double-em/llm-hass-app` 1.4.5.
+
+### Fixed
+- **run.sh: ensure /data/vector_memory is created.** The previous
+  `mkdir -p` silently failed when the supervisor mount of `/data`
+  (root:root mode 0755) made the parent non-writable. `run.sh` now
+  creates each required subdirectory explicitly before the chmod step,
+  and adds `vector_memory` to the list (previously omitted — VectorStore
+  creates it lazily but supervisor mounts can block that too).
+- **run.sh: runs as root.** The published `ghcr.io/double-em/llm-hass-app`
+  image now runs without `USER appuser` so the chmod 777 on /data actually
+  takes effect on the supervisor mount. `run.sh` was updated to `exec
+  python3` directly (no `su appuser` wrapper) so it runs in the same
+  root context as the image.
+
+### Notes
+- Pairs with `double-em/llm-hass-app` 1.4.5 (GH PR #3). The TTS fix
+  (embed=true default, JSON-over-ingress) and the vector memory
+  diagnostics (data_dir block in /api/health, visible permission errors
+  in startup log) are in the app image. Re-install the addon from the
+  store (or click Update) to pull 1.4.5.
+
 ## [1.4.4] - 2026-06-23
 
 ### Changed
